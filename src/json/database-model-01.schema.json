@@ -1,0 +1,358 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  //"$id": "http://schemas.sped.mobi/json/database-model-01.schema.json",
+  "properties": {
+    "Database": {
+      "$ref": "#/definitions/Databases"
+    }
+  },
+  "definitions": {
+    "Configurations": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Database": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Database"
+          }
+        }
+      },
+      "required": [
+        "Database"
+      ],
+      "title": "Configurations"
+    },
+    "Database": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Schemas": {
+          "type": "array",
+          "minimum": 0,
+          "items": {
+            "$ref": "#/definitions/Schema"
+          }
+        },
+        "Tables": {
+          "type": "array",
+          "minimum": 0,
+          "items": {
+            "$ref": "#/definitions/Table"
+          }
+        },
+        "Version": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Name",
+        "Schemas",
+        "Tables",
+        "Version"
+      ],
+      "title": "Database"
+    },
+    "Databases": {
+      "type": "array",
+      "minimum": 1,
+      "items": {
+        "$ref": "#/definitions/Database"
+      }
+    },
+    "Schema": {
+      "type": "object",
+      "description": "The database schema of a database system is its structure described in a formal language supported by the database management system (DBMS).\r\nThe term 'schema' refers to the organization of data as a blueprint of how the database is constructed (divided into database tables in the case of relational databases).",
+      "additionalProperties": false,
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "DbDefault": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "DbDefault",
+        "Name"
+      ],
+      "title": "Schema"
+    },
+    "Table": {
+      "type": "object",
+      "description": "A table is a collection of related data held in a structured format within a database. It consists of columns, and rows.",
+      "additionalProperties": false,
+      "properties": {
+        "Columns": {
+          "type": "array",
+          "minimum": 0,
+          "items": {
+            "$ref": "#/definitions/Column"
+          }
+        },
+        "Indexes": {
+          "type": "array",
+          "minimum": 0,
+          "items": {
+            "$ref": "#/definitions/Index"
+          }
+        },
+        "ForeignKeys": {
+          "type": "array",
+          "minimum": 0,
+          "items": {
+            "$ref": "#/definitions/ForeignKey"
+          }
+        },
+        "Schema": {
+          "type": "string",
+          "default": "dbo"
+        },
+        "Name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Columns",
+        "ForeignKeys",
+        "Indexes",
+        "Name"
+      ],
+      "title": "Table"
+    },
+
+    "Column": {
+      "type": "object",
+      "description": "In a relational database, a column is a set of data values of a particular simple type, one value for each row of the database.",
+      "additionalProperties": false,
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Position": {
+          "type": "number"
+        },
+
+        "IsIdentity": {
+          "type": "boolean",
+          "default": false
+        },
+        "IsRowGuidCol": {
+          "type": "boolean",
+          "default": false
+        },
+        "IdentitySeed": {
+          "type": "number",
+          "default": 1
+        },
+        "IdentityIncrement": {
+          "type": "number",
+          "default": 1
+        },
+
+        "DataType": {
+          "$ref": "#/definitions/DbType"
+        },
+        "Size": {
+          "type": "number",
+          "default": 0
+        },
+        "Precision": {
+          "type": "number",
+          "default": 0
+        },
+        "Scale": {
+          "type": "number",
+          "default": 0
+        },
+        "NullOption": {
+          "$ref": "#/definitions/NullOption"
+        }
+      },
+      "required": [
+        "Name",
+        "DataType",
+        "Position"
+      ],
+      "title": "Column"
+    },
+    "ForeignKey": {
+      "type": "object",
+      "description": "A foreign key is a field (or collection of fields) in one table that uniquely identifies a row of another table or the same table.",
+      "additionalProperties": false,
+      "properties": {
+        "ForeignKeyColumns": {
+          "type": "array",
+          "minimum": 0,
+          "items": {
+            "$ref": "#/definitions/ForeignKeyColumn"
+          }
+        },
+        "Name": {
+          "type": "string"
+        },
+        "PkTableSchema": {
+          "type": "string"
+        },
+        "PkTable": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ForeignKeyColumns",
+        "Name",
+        "PkTable",
+        "PkTableSchema"
+      ],
+      "title": "ForeignKey"
+    },
+    "ForeignKeyColumns": {
+      "type": "object",
+      "description": "ForeignKeyColumns are containers for foreign key columns.",
+      "additionalProperties": false,
+      "properties": {
+        "ForeignKeyColumn": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ForeignKeyColumn"
+          }
+        }
+      },
+      "required": [
+        "ForeignKeyColumn"
+      ],
+      "title": "ForeignKeyColumns"
+    },
+    "ForeignKeyColumn": {
+      "type": "object",
+      "description": "A foreign key column refers to one of the the child table's columns or the parent table's column's. When describing foreign keys, one must also describe foreign key columns.",
+      "additionalProperties": false,
+      "properties": {
+        "FkColumn": {
+          "type": "string"
+        },
+        "Position": {
+          "type": "number"
+        },
+        "PkColumn": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "FkColumn",
+        "PkColumn",
+        "Position"
+      ],
+      "title": "ForeignKeyColumn"
+    },
+    "Index": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Members": {
+          "type": "array",
+          "minimum": 0,
+          "items": {
+            "$ref": "#/definitions/Member"
+          }
+        },
+        "Name": {
+          "type": "string"
+        },
+        "IsClustered": {
+          "type": "boolean",
+          "default": false
+        },
+        "IsUnique": {
+          "type": "boolean",
+          "default": false
+        },
+        "IsPrimary": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "required": [
+        "IsClustered",
+        "IsPrimary",
+        "IsUnique",
+        "Members",
+        "Name"
+      ],
+      "title": "Index"
+    },
+    "Member": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Column": {
+          "type": "string"
+        },
+        "Position": {
+          "type": "number"
+        },
+        "IsIncluded": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "required": [
+        "Column",
+        "IsIncluded",
+        "Position"
+      ],
+      "title": "Member"
+    },
+    "NullOption": {
+      "type": "string",
+      "enum": [
+        "NULL",
+        "NOT NULL"
+      ],
+      "default": "NULL"
+    },
+    "DbType": {
+      "type": "string",
+      "enum": [
+        "tinyint",
+        "smallint",
+        "bigint",
+        "int",
+        "smallmoney",
+        "money",
+        "float",
+        "real",
+        "numeric",
+        "bit",
+        "decimal",
+        "date",
+        "datetimeoffset",
+        "datetime2",
+        "smalldatetime",
+        "datetime",
+        "time",
+        "char",
+        "varchar",
+        "text",
+        "nchar",
+        "nvarchar",
+        "ntext",
+        "binary",
+        "varbinary",
+        "image",
+        "cursor",
+        "rowversion",
+        "hierarchyid",
+        "uniqueidentifier",
+        "sql_variant",
+        "xml",
+        "table",
+        "geography",
+        "geometry"
+      ]
+    } 
+  }
+}

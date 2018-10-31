@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2048
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "json", "json", "{4765D5A6-F71E-40BA-9138-FD50FDC30C38}"
+	ProjectSection(SolutionItems) = preProject
+		examples.json = examples.json
+		src\json\schema-store.json = src\json\schema-store.json
+	EndProjectSection
+	ProjectSection(FolderGlobals) = preProject
+		__JSONSchema = src\json\database-model-01.schema.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{2772D15B-EE20-4F0F-A60F-BBBCBE42ADF7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "specs", "specs", "{E50C387C-C674-41DB-9514-B6FA7947A954}"
+	ProjectSection(SolutionItems) = preProject
+		src\json\catalog.json = src\json\catalog.json
+		src\json\database-model-01.schema.json = src\json\database-model-01.schema.json
+		src\json\draft-04.schema.json = src\json\draft-04.schema.json
+		src\json\draft-06.schema.json = src\json\draft-06.schema.json
+		src\json\draft-07.schema.json = src\json\draft-07.schema.json
+		src\json\openapi-3.0.json = src\json\openapi-3.0.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E50C387C-C674-41DB-9514-B6FA7947A954} = {4765D5A6-F71E-40BA-9138-FD50FDC30C38}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F1D7D56A-7C4F-4C7A-A1DF-16930735E110}
+	EndGlobalSection
+EndGlobal
