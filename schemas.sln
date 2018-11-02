@@ -13,6 +13,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "json", "json", "{4765D5A6-F
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{2772D15B-EE20-4F0F-A60F-BBBCBE42ADF7}"
+	ProjectSection(SolutionItems) = preProject
+		src\xml\db.schema.xsd = src\xml\db.schema.xsd
+		src\xml\powershell-format.xsd = src\xml\powershell-format.xsd
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "specs", "specs", "{E50C387C-C674-41DB-9514-B6FA7947A954}"
 	ProjectSection(SolutionItems) = preProject

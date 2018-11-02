@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="Schemas" type="Schemas" />
+  <xs:complexType name="Schemas">
+    <xs:sequence>
+      <xs:element ref="Schema" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="Schema" type="Schema" />
+  <xs:complexType name="Schema">
+    <xs:attribute name="Name" type="xs:NCName" />
+    <xs:attribute name="DbDefault" type="xs:boolean" />
+  </xs:complexType>
+
+  <xs:element name="Tables" type="Tables" />
+  <xs:complexType name="Tables">
+    <xs:sequence>
+      <xs:element ref="Table" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="Table" type="Table" />
+  <xs:complexType name="Table">
+    <xs:sequence>
+      <xs:element ref="Columns" minOccurs="0" />
+      <xs:element ref="Indexes" minOccurs="0" />
+      <xs:element ref="ForeignKeys" minOccurs="0" />
+    </xs:sequence>
+    <xs:attribute name="Schema" type="xs:NCName" />
+    <xs:attribute name="Table" type="xs:NCName" />
+  </xs:complexType>
+
+  <xs:element name="Indexes" type="Indexes" />
+  <xs:complexType name="Indexes">
+    <xs:sequence>
+      <xs:element ref="Index" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="Index" type="Index" />
+  <xs:complexType name="Index">
+    <xs:sequence>
+      <xs:element ref="Members" minOccurs="0" />
+    </xs:sequence>
+    <xs:attribute name="Name" type="xs:NCName" />
+    <xs:attribute name="IsClustered" type="xs:boolean" />
+    <xs:attribute name="IsUnique" type="xs:boolean" />
+    <xs:attribute name="IsPrimary" type="xs:boolean" />
+  </xs:complexType>
+
+  <xs:element name="Members" type="Members" />
+  <xs:complexType name="Members">
+    <xs:sequence>
+      <xs:element ref="Member" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="Member" type="Member" />
+  <xs:complexType name="Member">
+    <xs:attribute name="Column" type="xs:NCName" />
+    <xs:attribute name="Position" type="xs:positiveInteger" />
+    <xs:attribute name="IsIncluded" type="xs:boolean" />
+  </xs:complexType>
+
+  <xs:element name="Columns" type="Columns" />
+  <xs:complexType name="Columns">
+    <xs:sequence>
+      <xs:element ref="Column" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="Column" type="Column" />
+  <xs:complexType name="Column">
+    <xs:attribute name="Name" type="xs:NCName" />
+    <xs:attribute name="IsIdentity" type="xs:boolean" use="optional" />
+    <xs:attribute name="IdentitySeed" type="xs:positiveInteger" use="optional" />
+    <xs:attribute name="IdentityIncrement" type="xs:positiveInteger" use="optional" />
+    <xs:attribute name="Position" type="xs:positiveInteger" />
+    <xs:attribute name="DataType" type="DataType" />
+    <xs:attribute name="AllowNulls" type="xs:boolean" use="optional" />
+  </xs:complexType>
+
+  <xs:element name="ForeignKeys" type="ForeignKeys" />
+  <xs:complexType name="ForeignKeys">
+    <xs:sequence>
+      <xs:element ref="ForeignKey" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="ForeignKey" type="ForeignKey" />
+  <xs:complexType name="ForeignKey">
+    <xs:sequence>
+      <xs:element ref="ForeignKeyColumns" minOccurs="0"  />
+    </xs:sequence>
+    <xs:attribute name="Name" type="xs:NCName" />
+    <xs:attribute name="PkTableSchema" type="xs:string" />
+    <xs:attribute name="PkTable" type="xs:string" />
+  </xs:complexType>
+
+  <xs:element name="ForeignKeyColumns" type="ForeignKeyColumns" />
+  <xs:complexType name="ForeignKeyColumns">
+    <xs:sequence>
+      <xs:element ref="ForeignKeyColumn" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="ForeignKeyColumn" type="ForeignKeyColumn" />
+  <xs:complexType name="ForeignKeyColumn">
+    <xs:attribute name="FkColumn" type="xs:NCName" />
+    <xs:attribute name="Position" type="xs:positiveInteger" />
+    <xs:attribute name="PkColumn" type="xs:NCName" />
+  </xs:complexType>
+
+
+  <xs:element name="Database" type="Database" />
+  <xs:complexType name="Database">
+    <xs:sequence>
+      <xs:element ref="Schemas" />
+      <xs:element ref="Tables" />
+    </xs:sequence>
+    <xs:attribute name="Version" type="xs:string" />
+    <xs:attribute name="DatabaseName" type="xs:NCName" />
+  </xs:complexType>
+
+  <xs:simpleType name="DataType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[a-z]+(\(([0-9]*(, ?[0-9]*)?|MAX)\))?" />
+    </xs:restriction>
+  </xs:simpleType>
+
+
+</xs:schema>
