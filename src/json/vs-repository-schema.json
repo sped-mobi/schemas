@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "id": "",
+  "title": "Visual Studio Repository Schema",
+  "description": "JSON Schema for Visual Studio Repositories.",
+  "type": "object",
+  "required": [
+    "title",
+    "repositories"
+  ],
+  "properties": {
+
+    "title": {
+      "type": "string",
+      "description": "A short name that describes the repository."
+    },
+    "description": {
+      "type": "string",
+      "description": "A synopsis of the purpose of the repository. The description is optional."
+    },
+    "author": {
+      "type": "string",
+      "description": "The person(s) responsible for the creation of this repository. The author is optional."
+    },
+    "repositories": {
+      "$ref": "#/definitions/repositories"
+    }
+  },
+  "definitions": {
+
+    "repositories": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/definitions/repository" },
+      "default": {}
+    },
+
+    "repositoryConnection": {
+      "type": "object",
+      "required": [ "gitUrl", "zipUrl" ],
+      "properties": {
+        "gitUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "zipUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "iconUrl": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+
+    "repository": {
+      "type": "object",
+      "description": "Abstraction of a repository that points to other template-based repositories.",
+      "additionalProperties": false,
+      "required": [ "id", "category", "connection" ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "A universally unique identifier assigned to this repository."
+        },
+        "description": {
+          "type": "string",
+          "description": "An brief summary of the repository. The description is optional."
+        },
+        "category": {
+          "type": "string",
+          "description": "A division of this repository regarded as having particular shared characteristics."
+        },
+        "connection": {
+          "$ref": "#/definitions/repositoryConnection"
+        }
+      }
+    }
+  }
+}
