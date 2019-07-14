@@ -30,6 +30,7 @@
 
     "repositories": {
       "type": "object",
+      "description": "Dictionary of repository objects.",
       "additionalProperties": { "$ref": "#/definitions/repository" },
       "default": {}
     },
@@ -52,7 +53,11 @@
         }
       }
     },
-
+    "guid": {
+      "pattern": "^{?[0-9A-Fa-f]{8}[-]?([0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}}?$",
+      "type": "string",
+      "description": "A universally unique identifier (UUID) is a 128-bit number used to identify information in computer systems. The term globally unique identifier (GUID) is also used, typically in software created by Microsoft."
+    },
     "repository": {
       "type": "object",
       "description": "Abstraction of a repository that points to other template-based repositories.",
@@ -60,9 +65,7 @@
       "required": [ "id", "category", "connection" ],
       "properties": {
         "id": {
-          "type": "string",
-          "format": "uuid",
-          "description": "A universally unique identifier assigned to this repository."
+          "$ref": "#/definitions/guid"
         },
         "description": {
           "type": "string",
@@ -74,6 +77,44 @@
         },
         "connection": {
           "$ref": "#/definitions/repositoryConnection"
+        },
+        "replacements": {
+          "$ref": "#/definitions/replacements"
+        } 
+      }
+    },
+
+    "replacementLocation": {
+      "type": "string",
+      "description": "Determines the location of the replacement",
+      "enum": [
+        "text",
+        "directory",
+        "file"
+      ]
+    },
+
+    "replacements": {
+      "type": "object",
+      "description": "Dictionary of replacement objects.",
+      "additionalProperties": { "$ref": "#/definitions/replacement" },
+      "default": {}
+    },
+
+    "replacement": {
+      "type": "object",
+      "required": [ "value", "replaces", "location" ],
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/replacementLocation"
+        },
+        "value": {
+          "type": "string",
+          "description": "The value to be replaced."
+        },
+        "replaces": {
+          "type": "string",
+          "description": "The replacement to substitute for the value."
         }
       }
     }
