@@ -16,25 +16,8 @@
   },
   "servers": [
     {
-      "url": "{scheme}://teks-api.texasgateway.org/{basePath}",
-      "description": "TEA Texas Gateway Server",
-      "variables": {
-        "basePath": {
-          "description": "Represents the base path for the api.",
-          "default": "ims/case/v1p0",
-          "enum": [
-            "ims/case/v1p0"
-          ]
-        },
-        "scheme": {
-          "description": "Represents the base path for the api.",
-          "default": "https",
-          "enum": [
-            "http",
-            "https"
-          ]
-        }
-      }
+      "url": "https://teks-api.texasgateway.org/ims/case/v1p0",
+      "description": "TEA Texas Gateway Server"
     }
   ],
   "tags": [
